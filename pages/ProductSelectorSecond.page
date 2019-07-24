@@ -1,0 +1,34 @@
+<apex:page standardController="Opportunity" extensions="ProductSelectorExtensionSecond">
+    <apex:form >
+        <apex:pageBlock mode="mainDetail">
+        
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+        
+            <apex:pageBlockSection title="Opportunity">
+                <apex:inputField value="{!Opportunity.Name}"/>
+                <apex:inputField value="{!Opportunity.CloseDate}"/>
+                <apex:inputField value="{!Opportunity.StageName}"/>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockTable value="{!LineItems}" var="lines">
+                <apex:column headerValue="Select Product" width="100">
+                    <!-- apex:selectList value="{!lines.PriceBookEntry}" multiselect="false" size="1" -->
+                    <apex:selectList value="{!dummyId}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!productList}"/>
+                    </apex:selectList>
+                </apex:column>                    
+                <apex:column headerValue="Amount" width="100">
+                    <apex:inputField value="{!lines.TotalPrice}"/>
+                </apex:column>                    
+                <apex:column headerValue="Notes" width="400">
+                    <apex:inputTextArea cols="50" rows="3" value="{!lines.Description}" />
+                </apex:column>
+            </apex:pageBlockTable>      
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
